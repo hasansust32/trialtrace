@@ -4,6 +4,7 @@ import httpx
 API = "https://clinicaltrials.gov/api/v2/studies"
 
 
+
 def fetch_studies(condition: str, n: int = 50) -> list[dict]:
     """Fetch up to n interventional studies that have a narrative description."""
     studies: list[dict] = []
