@@ -23,8 +23,14 @@ def _tokens(s: str) -> set[str]:
 
 
 def _phase(s: str) -> str:
-    s = s.upper().replace(" ", "").replace("PHASEI", "PHASE1")
-    return re.sub(r"[^A-Z0-9/]", "", s)
+    """Normalise 'Phase III', 'phase II/III', 'Phase 1b/2' -> PHASE3, PHASE2/PHASE3, PHASE1/PHASE2."""
+    s = s.upper()
+    roman = {"IV": "4", "III": "3", "II": "2", "I": "1"}
+    s = re.sub(r"\b(IV|III|II|I)(?=\b|[AB]\b)", lambda m: roman[m.group(1)], s)
+    nums = re.findall(r"[1-4]", s)
+    if not nums:
+        return re.sub(r"[^A-Z]", "", s)
+    return ("EARLY_" if "EARLY" in s else "") + "/".join(f"PHASE{n}" for n in nums)
 
 
 def is_correct(field: str, pred: str, gt) -> bool:
