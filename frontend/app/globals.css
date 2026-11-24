@@ -1,0 +1,20 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: #1a1a1a; background: #f6f7f9; }
+header { padding: 14px 24px; background: #0f2a44; color: white; }
+header h1 { margin: 0; font-size: 18px; }
+header p { margin: 2px 0 0; font-size: 13px; opacity: .8; }
+.wrap { display: grid; grid-template-columns: 320px 1fr; height: calc(100vh - 62px); }
+.list { overflow-y: auto; border-right: 1px solid #ddd; background: white; }
+.item { padding: 10px 14px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; }
+.item:hover, .item.active { background: #eaf2fb; }
+.item b { display: block; font-size: 12px; color: #456; }
+.detail { overflow-y: auto; padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
+table { width: 100%; border-collapse: collapse; background: white; font-size: 13px; }
+td, th { text-align: left; padding: 8px; border-bottom: 1px solid #eee; vertical-align: top; }
+.val { cursor: pointer; color: #0a58ca; text-decoration: underline dotted; }
+.val.missing { color: #999; cursor: default; text-decoration: none; font-style: italic; }
+.flag { font-size: 11px; color: #b54708; display: block; }
+.source { background: white; padding: 16px; white-space: pre-wrap; font-size: 13px; line-height: 1.55; border: 1px solid #eee; }
+mark { background: #ffe58a; padding: 1px 0; }
+h2 { font-size: 15px; margin: 0 0 8px; }
+a { color: #0a58ca; }

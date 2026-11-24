@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: trial
+      POSTGRES_PASSWORD: trial
+      POSTGRES_DB: trialtrace
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Used for AWS/EC2 deploy: `docker compose --profile full up -d --build`
+  api:
+    profiles: ["full"]
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://trial:trial@db:5432/trialtrace
+    ports:
+      - "8000:8000"
+    depends_on: [db]
+
+  web:
+    profiles: ["full"]
+    build:
+      context: ./frontend
+      args:
+        API_INTERNAL_URL: http://api:8000
+    ports:
+      - "3000:3000"
+    depends_on: [api]
+
+volumes:
+  pgdata:
